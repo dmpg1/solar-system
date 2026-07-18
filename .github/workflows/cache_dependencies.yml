@@ -1,6 +1,11 @@
 name: Cache Dependencies
 
-on: [push]
+on: 
+  workflow_dispatch:
+  push:
+    branches: 
+      - main
+      - feature/*
 
 jobs:
   unit-tasting:
@@ -29,7 +34,7 @@ jobs:
         key: ${{ runner.os }}-node-modules-${{ hashfiles('package-lock.json') }}
     
     - name: Install Dependencies
-      run: npm Install
+      run: npm install
 
     - name: Unit Testing
       id: nodejs-unit-testing-step
